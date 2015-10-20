@@ -1,0 +1,17 @@
+{
+  "name": "myfunctionalsystem",
+  "version": "0.0.0-poc",
+  "private": true,
+  "description": "The Webserver Component for MyFunctionalSystem.",
+  "contributors": [
+    {
+      "name": "David James",
+      "email": "jamesd28@mymacewan.ca"
+    }
+  ],
+  "dependencies": {
+    "express": "^4.13.3",
+    "morgan": "^1.6.1"
+  },
+  "license": "MIT"
+}

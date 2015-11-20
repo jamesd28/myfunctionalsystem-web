@@ -4,11 +4,10 @@ var moment = require('moment'),
 module.exports = function(sequelize, DataTypes){
 	var Person = sequelize.define("Person", {
 		// Sequelize creates an ID field automagically.
-		// personID: { type: DataTypes.INTEGER(7).UNSIGNED.ZEROFILL, allowNull: false, autoIncrement: true, unique: true },
 		firstName: { type: DataTypes.STRING, allowNull: false },
 		lastName: { type: DataTypes.STRING, allowNull: false },
 		middleName: { type: DataTypes.STRING },
-		preferredName: { type: DataTypes.STRING, allowNull: false },
+		preferredName: { type: DataTypes.STRING },
 		birthDate: { type: DataTypes.DATE, allowNull: false },
 
 		// Login Information.
@@ -24,6 +23,12 @@ module.exports = function(sequelize, DataTypes){
 			setPassword: function(password){
 				this.password = bcrypt.hashSync(password);
 				this.save();
+			}
+		},
+		classMethods: {
+			associate: function(models){
+				Person.hasMany(models.Enrollment);
+				Person.hasOne(models.Planner);
 			}
 		}
 	});

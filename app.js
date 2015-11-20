@@ -22,10 +22,9 @@ var passport = require('./app/authorization')(app, db);
 app.post('/auth/login', function(req, res, next){
 	console.log(req.body);
 	next();
-},passport.authenticate('login', {
-	successRedirect: '/auth/login/success',
-	failureRedirect: '/auth/login/failure'
-}));
+}, passport.authenticate('login'), function(req, res){
+	res.sendStatus(200);
+});
 
 // Routes
 app.get('/', function(req, res){

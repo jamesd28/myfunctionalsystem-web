@@ -1,0 +1,8 @@
+# myfunctionalsystem-web
+
+Script Order:
+
+** Don't forget to add test users ** 
+(1) PopulateTerms
+(2) PopulateCourses
+(3) PopulateClasses

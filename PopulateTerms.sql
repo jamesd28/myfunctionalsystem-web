@@ -1,0 +1,3 @@
+INSERT INTO `myFunctionalDB`.`Terms` (`id`, `termID`, `termStart`, `termEnd`, `termName`, `createdAt`, `updatedAt`) VALUES ('1', '1000', '2015-09-01 21:13:46', '2015-12-31 21:13:46', 'Fall', '2015-11-24 21:13:46', '2015-11-24 21:13:46');
+INSERT INTO `myFunctionalDB`.`Terms` (`id`, `termID`, `termStart`, `termEnd`, `termName`, `createdAt`, `updatedAt`) VALUES ('2', '1010', '2016-01-01 21:13:46', '2016-04-30 21:13:46', 'Winter', '2015-11-24 21:13:46', '2015-11-24 21:13:46');
+INSERT INTO `myFunctionalDB`.`Terms` (`id`, `termID`, `termStart`, `termEnd`, `termName`, `createdAt`, `updatedAt`) VALUES ('3', '1020', '2016-05-01 21:13:46', '2016-06-30 21:13:46', 'Spring/Summer', '2015-11-24 21:13:46', '2015-11-24 21:13:46');

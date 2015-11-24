@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes){
 	}, {
 		classMethods: {
 			associate: function(models){
-				Course.hasMany(models.Class);
+				Course.hasMany(models.Class, {as: 'Classes'});
 				Course.belongsToMany(models.Course, {as: 'Prerequisites', through: models.Prerequisite});
 				Course.belongsTo(models.Term, {as: 'Term'});
 				Course.hasMany(models.Planner);

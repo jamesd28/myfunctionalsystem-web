@@ -2,7 +2,8 @@
 var express = require('express'),
 	morgan = require('morgan'),
 	helmet = require('helmet'),
-	bodyparser = require('body-parser');
+	bodyparser = require('body-parser'),
+	session = require('express-session');
 
 // Application Dependencies.
 var db = require('./app/database');
@@ -14,6 +15,7 @@ var	app = express();
 app.use(bodyparser.json()); // Parse POST data.
 app.use(morgan('dev')); // Console Logging
 app.use(helmet()); // Security :D
+app.use(session({secret: '305305305305', resave: true, saveUninitialized: false}));
 
 
 // Passport Initialization / Configuration

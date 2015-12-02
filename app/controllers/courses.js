@@ -34,33 +34,8 @@ module.exports = function(app, db){
 	});
 
 	app.get('/classes/:courseid', function(req, res){
-		db.Course
-			.findById(req.params.id)
-			.then(function(course){
-				course
-					.getClasses()
-					.then(function(classes){
-						res.json(classes);
-					});
-			});
-	});
-
-	app.post('/course/addtoplanner/:id', function(req, res){
-		if (!req.user){
-			res.sendStatus(401).end();
-			return;
-		}
-
-		db.Person
-			.findOne({
-				where: {
-					netID: req.user.netID
-				}
-			})
-			.then(function(person){
-				person.getPlanners().then(function(planners){
-					console.log(planners);
-				});
-			});
+		db.database.query('SELECT * FROM Classes WHERE CourseId = ' + db.database.getQueryInterface().escape(req.params.courseid) + ';').spread(function(data){
+			res.json(data);
+		});
 	});
 };

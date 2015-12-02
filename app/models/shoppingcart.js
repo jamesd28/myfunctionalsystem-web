@@ -5,7 +5,7 @@ module.exports = function(sql, DataTypes){
 		classMethods: {
 			associate: function(models){
 				ShoppingCart.belongsTo(models.Person);
-				ShoppingCart.belongsTo(models.Course);
+				ShoppingCart.belongsTo(models.Class);
 			}
 		}
 	});

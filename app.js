@@ -36,8 +36,8 @@ app.get('/', function(req, res){
 require('./app/controllers')(app, db);
 
 // Start listening.
-db.database.sync({force: true}).then(function(){
-	db.seed();
-// db.database.sync().then(function(){
+// db.database.sync({force: true}).then(function(){
+	// db.seed();
+db.database.sync().then(function(){
 	app.listen(3000);
 });

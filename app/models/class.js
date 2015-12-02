@@ -1,6 +1,10 @@
 module.exports = function(sequelize, DataTypes){
 	var Class = sequelize.define('Class', {
-		type: {type: DataTypes.ENUM('LEC', 'LAB', 'SEM'), defaultValue: 'LEC'}
+		type: {type: DataTypes.ENUM('LEC', 'LAB', 'SEM'), defaultValue: 'LEC'},
+		sectionNumber: {type: DataTypes.STRING},
+		startTime: {type: DataTypes.DATE, allowNull: false},
+		endTime: {type: DataTypes.DATE, allowNull: false},
+		meetDates: {type: DataTypes.STRING} // MWF / TR / S
 	}, {
 		classMethods: {
 			associate: function(models){

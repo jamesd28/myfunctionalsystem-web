@@ -7,40 +7,19 @@ module.exports = function(app, db){
 			return;
 		}
 
-		db.Person
-			.findOne({
-				where: {
-					netID: req.user.netID
-				}
-			})
-			.then(function(person){
-				db.Course.findById(req.params.courseID)
-					.then(function(course){
-						db.Person.findById(req.user.id).then(function(person){
-							db.Planner
-								.create()
-								.then(function(plan){
-									plan.setCourse(course);
-									plan.setPerson(person);
-									res.sendStatus(200);
-							}).catch(function(err){
-								res.sendStatus(500);
-							});
-						}).catch(function(err){
-							res.sendStatus(500);
-						});
-				}).catch(function(err){
-					res.sendStatus(500);
-				});
-			});
+		db.database.query('INSERT INTO Planners(`CourseId`, `PersonId`) VALUES ('+ req.params.courseid +', ' + req.user.id + ')').then(function(data){
+			res.sendStatus(200).end();
+		}).catch(function(err){
+			res.sendStatus(500).end();
+		});
 	});
 
-	app.post('/planner/delete', function(req, res){
+	app.post('/planner/delete/:courseid', function(req, res){
 		if (!req.user) {
 			res.sendStatus(401).end();
 		}
 
-		db.database.query('DELETE * FROM Planners WHERE PersonId = ' + db.database.getQueryInterface().escape(req.user.id) + ' AND CourseId = ' + db.database.getQueryInterface().escape(req.body.CourseId) + ';').then(function(plan){
+		db.database.query('DELETE FROM Planners WHERE PersonId = ' + req.user.id + ' AND CourseId = ' + req.params.courseid + ';').then(function(plan){
 			res.sendStatus(200).end();
 		}).catch(function(err){
 			res.sendStatus(500).end();
@@ -50,10 +29,11 @@ module.exports = function(app, db){
 	app.get('/planner', function(req, res){
 		if (!req.user) {
 			res.sendStatus(401).end();
+			console.log(req.user);
 		}
 
 		// console.log('SELECT * FROM Planners WHERE PersonId = ' + db.database.getQueryInterface().escape(req.user.id));
-		db.database.query('SELECT DISTINCT(CourseId) FROM Planners WHERE PersonId = ' + db.database.getQueryInterface().escape(req.user.id)).spread(function(data){
+		db.database.query('SELECT * FROM Courses c INNER JOIN Planners p ON c.id = p.CourseId WHERE p.PersonId = ' + req.user.id + ' GROUP BY c.id;').spread(function(data){
 			// console.log(data);
 			res.json(data);
 		});

@@ -21,10 +21,7 @@ app.use(session({secret: '305305305305', resave: true, saveUninitialized: false}
 // Passport Initialization / Configuration
 var passport = require('./app/authorization')(app, db);
 
-app.post('/auth/login', function(req, res, next){
-	console.log(req.body);
-	next();
-}, passport.authenticate('login'), function(req, res){
+app.post('/auth/login', passport.authenticate('login'), function(req, res){
 	res.sendStatus(200);
 });
 
